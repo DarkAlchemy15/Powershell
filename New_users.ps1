@@ -31,10 +31,12 @@ if (-not $PSBoundParameters.ContainsKey('file')){
     #Fixin"g First and Last Name so they Match
     # Ex. " ToNy" ==> "Tony"
     $FirstName = $Firstname.ToLower().trim()
-    $FirstName = $FirstName.Replace($FirstName[0],$FirstName[0].ToString().ToUpper())
+    #$FirstName = $FirstName.Replace($FirstName[0],$FirstName[0].ToString().ToUpper())
+    $FirstName = (Get-Culture).TextInfo.ToTitleCase($FirstName)
     $LastName = $LastName.ToLower().trim()
-    $LastName = $LastName.Replace($LastName[0],$LastName[0].ToString().ToUpper())
-    
+#    $LastName = $LastName.Replace($LastName[0],$LastName[0].ToString().ToUpper())
+    $LastName = (Get-Culture).TextInfo.ToTitleCase($LastName)
+
     $Description = $Description.Trim().ToLower()
     $Username = $LastName + $FirstName[0]
     $email = $Username + "@lab.local"
@@ -70,9 +72,11 @@ If ($PSBoundParameters.ContainsKey('file')){
 
     $user_list.foreach{
         $FirstName = $_.FirstName.trim().ToLower()
-        $FirstName = $FirstName.Replace($FirstName[0],$FirstName.ToUpper()[0])
+        #$FirstName = $FirstName.Replace($FirstName[0],$FirstName.ToUpper()[0])
+        $FirstName = (Get-Culture).TextInfo.ToTitleCase($FirstName)
         $LastName = $_.LastName.Trim().ToLower()
-        $LastName = $LastName.Replace($LastName[0],$LastName.ToUpper()[0])
+        #$LastName = $LastName.Replace($LastName[0],$LastName.ToUpper()[0])
+        $LastName = (Get-Culture).TextInfo.ToTitleCase($LastName)
 
         New-ADUser `
         -Name $($Firstname + " " + $LastName) `
