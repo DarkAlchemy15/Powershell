@@ -33,8 +33,8 @@ Function Test-FileLock {
   
 #Gets AFT Number
 #this just counts the number of folders and then adds 1, there isn't any validation yet.
-$AFT_num = Get-ChildItem -Path C:\tools\Logs -Directory | Where-Object name -Like "OPS-2023-LS-*" | Select-Object name
-$AFT_num = $AFT_num.name.count + 1 | ForEach-Object tostring OPS-2023-LS-000
+$AFT_num = Get-ChildItem -Path C:\tools\Logs -Directory | Where-Object name -Like "AFT-2023-LS-*" | Select-Object name
+$AFT_num = $AFT_num.name.count + 1 | ForEach-Object tostring AFT-2023-LS-000
 
 #Asking user questions in a while loop, to verify information is correct.
 # Ask User questions
